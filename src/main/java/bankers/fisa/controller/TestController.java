@@ -57,14 +57,6 @@ public class TestController {
 		return cust.toString();
 	}
 	
-	@GetMapping("/custemp")
-	public String getCustEmp() {
-		
-		CustEmp custEmp = custEmpRepository.findById((long) 1).get();
-		System.out.println(custEmp.toString());
-		return custEmp.toString();
-	}
-	
 	@GetMapping("/creditalarm")
 	public String getCreditAlarm() {
 		
