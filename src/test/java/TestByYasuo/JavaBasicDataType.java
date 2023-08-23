@@ -22,6 +22,8 @@ public class JavaBasicDataType {
         System.out.println(f);
         System.out.println(g);
         System.out.println(h);
+        System.out.println(string);
+
 
     }
 }
