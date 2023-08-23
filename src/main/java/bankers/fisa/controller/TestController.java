@@ -3,6 +3,7 @@ package bankers.fisa.controller;
 import java.util.ArrayList;
 
 import bankers.fisa.entity.*;
+import bankers.fisa.entity.ckey.VMckey;
 import bankers.fisa.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/center-test")
+@RequestMapping("/center")
 public class TestController {
 
 	@Autowired
@@ -27,6 +28,9 @@ public class TestController {
 	private final VMAlarmRepository vmAlarmRepository = null;
 	@Autowired
 	private  final VMCatalRepository vmCatalRepository = null;
+	@Autowired
+	private final VMRepository vmRepository = null;
+	
 	
 	@GetMapping("/bankersemp")
 	public String getBankersEmp() {
@@ -94,5 +98,13 @@ public class TestController {
 		System.out.println(vmCatal.toString());
 		return  vmCatal.toString();
 	}
-//	git push test by sanggeon
+	
+	@GetMapping("/vmtest")
+	public String vmtest() {
+		
+		VMckey vmkey = new VMckey(1,"2023-08-22 18:36:05");
+		
+		VM vm = vmRepository.findById(vmkey).get();
+		return vm.toString();
+	}
 }
