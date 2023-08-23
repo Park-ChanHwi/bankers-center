@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "vm_catal")
-public class VmCatal {
+public class VMCatal {
     @Id
     private int catal_number;
 

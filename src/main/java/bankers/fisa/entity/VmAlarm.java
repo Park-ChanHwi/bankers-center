@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "vm_alarm")
-public class VmAlarm {
+public class VMAlarm {
     @Id
     private int alarm_number;
 

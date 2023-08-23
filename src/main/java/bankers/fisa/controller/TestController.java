@@ -24,9 +24,9 @@ public class TestController {
 	@Autowired
 	private final CreditAlarmRepository creditAlarmRepository = null;
 	@Autowired
-	private final VmAlarmRepository vmAlarmRepository = null;
+	private final VMAlarmRepository vmAlarmRepository = null;
 	@Autowired
-	private  final VmCatalRepository vmCatalRepository = null;
+	private  final VMCatalRepository vmCatalRepository = null;
 	
 	@GetMapping("/bankersemp")
 	public String getBankersEmp() {
@@ -82,7 +82,7 @@ public class TestController {
 	@GetMapping("/vmalarm")
 	public String getVmAlarm(){
 
-		VmAlarm vmAlarm = vmAlarmRepository.findById((long) 1).get();
+		VMAlarm vmAlarm = vmAlarmRepository.findById((long) 1).get();
 		System.out.println(vmAlarm.toString());
 		return vmAlarm.toString();
 	}
@@ -90,7 +90,7 @@ public class TestController {
 	@GetMapping("/vmcatal")
 	public String getVmCatel(){
 
-		VmCatal vmCatal = vmCatalRepository.findById((long) 1).get();
+		VMCatal vmCatal = vmCatalRepository.findById((long) 1).get();
 		System.out.println(vmCatal.toString());
 		return  vmCatal.toString();
 	}
