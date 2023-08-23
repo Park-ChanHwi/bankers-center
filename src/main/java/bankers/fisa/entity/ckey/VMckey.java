@@ -15,4 +15,7 @@ import lombok.NoArgsConstructor;
 public class VMckey implements Serializable{
 	private int vm_number;
 	private String vm_create_date;
+
+    public VMckey(int i, String s) {
+    }
 }

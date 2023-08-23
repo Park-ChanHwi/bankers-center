@@ -2,21 +2,12 @@ package bankers.fisa.controller;
 
 import java.util.ArrayList;
 
+import bankers.fisa.entity.*;
+import bankers.fisa.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import bankers.fisa.entity.BankersEmp;
-import bankers.fisa.entity.CreditAlarm;
-import bankers.fisa.entity.Cust;
-import bankers.fisa.entity.CustEmp;
-import bankers.fisa.entity.EmpRevenue;
-import bankers.fisa.repository.BankersEmpRepository;
-import bankers.fisa.repository.CreditAlarmRepository;
-import bankers.fisa.repository.CustEmpRepository;
-import bankers.fisa.repository.CustRepository;
-import bankers.fisa.repository.EmpRevenueRepository;
 
 @RestController
 @RequestMapping("/center-test")
@@ -32,6 +23,10 @@ public class TestController {
 	private final CustEmpRepository custEmpRepository = null;
 	@Autowired
 	private final CreditAlarmRepository creditAlarmRepository = null;
+	@Autowired
+	private final VmAlarmRepository vmAlarmRepository = null;
+	@Autowired
+	private  final VmCatalRepository vmCatalRepository = null;
 	
 	@GetMapping("/bankersemp")
 	public String getBankersEmp() {
@@ -82,6 +77,22 @@ public class TestController {
 		
 		System.out.println(bankersEmp.toString());
 		return bankersEmp.toString();
+	}
+
+	@GetMapping("/vmalarm")
+	public String getVmAlarm(){
+
+		VmAlarm vmAlarm = vmAlarmRepository.findById((long) 1).get();
+		System.out.println(vmAlarm.toString());
+		return vmAlarm.toString();
+	}
+
+	@GetMapping("/vmcatal")
+	public String getVmCatel(){
+
+		VmCatal vmCatal = vmCatalRepository.findById((long) 1).get();
+		System.out.println(vmCatal.toString());
+		return  vmCatal.toString();
 	}
 //	git push test by sanggeon
 }
