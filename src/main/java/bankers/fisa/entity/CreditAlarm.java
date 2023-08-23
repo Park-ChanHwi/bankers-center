@@ -11,16 +11,14 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "cust_emp")
-public class CustEmp {
+@Entity(name = "credit_alarm")
+public class CreditAlarm {
 	@Id
-	private int cust_emp_number;
+	private int alarm_number;
+	
 	private int cust_number;
-	private String cust_email;
-	private String cust_id;
-	private String cust_pw;
-	private String cust_pos;
-	
-	
+	private int credit1;
+	private int credit2;
+	private int credit3;
 
 }

@@ -8,9 +8,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import bankers.fisa.entity.BankersEmp;
+import bankers.fisa.entity.CreditAlarm;
 import bankers.fisa.entity.Cust;
+import bankers.fisa.entity.CustEmp;
 import bankers.fisa.entity.EmpRevenue;
 import bankers.fisa.repository.BankersEmpRepository;
+import bankers.fisa.repository.CreditAlarmRepository;
+import bankers.fisa.repository.CustEmpRepository;
 import bankers.fisa.repository.CustRepository;
 import bankers.fisa.repository.EmpRevenueRepository;
 
@@ -24,6 +28,10 @@ public class TestController {
 	private final EmpRevenueRepository empRevenueRepository = null;
 	@Autowired
 	private final CustRepository custRepository = null;
+	@Autowired
+	private final CustEmpRepository custEmpRepository = null;
+	@Autowired
+	private final CreditAlarmRepository creditAlarmRepository = null;
 	
 	@GetMapping("/bankersemp")
 	public String getBankersEmp() {
@@ -48,6 +56,22 @@ public class TestController {
 		Cust cust = custRepository.findById((long) 1).get();
 		System.out.println(cust.toString());
 		return cust.toString();
+	}
+	
+	@GetMapping("/custemp")
+	public String getCustEmp() {
+		
+		CustEmp custEmp = custEmpRepository.findById((long) 1).get();
+		System.out.println(custEmp.toString());
+		return custEmp.toString();
+	}
+	
+	@GetMapping("/creditalarm")
+	public String getCreditAlarm() {
+		
+		CreditAlarm creditAlarm = creditAlarmRepository.findById((long) 1).get();
+		System.out.println(creditAlarm.toString());
+		return creditAlarm.toString();
 	}
 	
 	@GetMapping("/vmlist")
