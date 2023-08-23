@@ -9,9 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestController {
 	
 	@GetMapping("/test")
-	public String test() {
-		
-        return "Center Tesst";
-
+	public String test() {	
+        return "Center Tesst111";
 	}
+
 }
