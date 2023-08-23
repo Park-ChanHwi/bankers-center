@@ -15,6 +15,14 @@ import lombok.NoArgsConstructor;
 public class CustEmp {
 	@Id
 	private int cust_emp_number;
+<<<<<<< HEAD
+=======
+	private int cust_number;
+	private String cust_email;
+	private String cust_id;
+	private String cust_pw;
+	private String cust_pos;
+>>>>>>> f84e1b2e99c7b5e05179248babf3bf8177ded518
 	
 	
 
