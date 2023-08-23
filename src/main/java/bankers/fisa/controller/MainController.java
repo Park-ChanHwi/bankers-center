@@ -1,5 +1,7 @@
 package bankers.fisa.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -7,37 +9,69 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import bankers.fisa.entity.CustEmp;
+import bankers.fisa.entity.VM;
 import bankers.fisa.repository.CustEmpRepository;
+import bankers.fisa.repository.VMRepository;
 
 @RestController
 @RequestMapping("/controller")
 public class MainController {
-	
+
 	@Autowired
 	private final CustEmpRepository custEmpRepository = null;
-	
-	@PostMapping("/login")
-	public String getBankersEmp(
-			@RequestParam("loginID") String loginID,
-			@RequestParam("loginPW") String loginPW) {
-		
+	@Autowired
+	private final VMRepository vmRepository = null;
+
+	@PostMapping("/vmlist")
+	public String vmlist(@RequestParam("loginID") String loginID, @RequestParam("loginPW") String loginPW) {
+
 		String result = "false";
-		
+
 		CustEmp custEmp = null;
 		try {
 			custEmp = custEmpRepository.findById(loginID).get();
 		} catch (Exception e) {
 			return result;
 		}
-		
-		if(custEmp != null) {
-			
-			if(loginPW.equals(custEmp.getCust_pw()) ) {
+
+		if (custEmp != null) {
+
+			if (loginPW.equals(custEmp.getCust_pw())) {
+				
+				List<VM> vmlist = vmRepository.findAll();
+				result = "";
+				
+				for(VM vm : vmlist) {
+					result += vm.toString() + ",";
+				}
+			}
+
+			return result.substring(0, result.length());
+		} else {
+			return result;
+		}
+	}
+
+	@PostMapping("/login")
+	public String login(@RequestParam("loginID") String loginID, @RequestParam("loginPW") String loginPW) {
+
+		String result = "false";
+
+		CustEmp custEmp = null;
+		try {
+			custEmp = custEmpRepository.findById(loginID).get();
+		} catch (Exception e) {
+			return result;
+		}
+
+		if (custEmp != null) {
+
+			if (loginPW.equals(custEmp.getCust_pw())) {
 				result = "true";
 			}
-			
+
 			return result;
-		}else {
+		} else {
 			return result;
 		}
 	}
