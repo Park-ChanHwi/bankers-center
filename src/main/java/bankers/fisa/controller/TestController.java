@@ -25,8 +25,6 @@ public class TestController {
 	@Autowired
 	private final VMAlarmRepository vmAlarmRepository = null;
 	@Autowired
-	private  final VMCatalRepository vmCatalRepository = null;
-	@Autowired
 	private final VMRepository vmRepository = null;
 	
 	
@@ -81,14 +79,6 @@ public class TestController {
 		return vmAlarm.toString();
 	}
 
-	@GetMapping("/vmcatal")
-	public String getVmCatel(){
-
-		VMCatal vmCatal = vmCatalRepository.findById((long) 1).get();
-		System.out.println(vmCatal.toString());
-		return  vmCatal.toString();
-	}
-	
 	@GetMapping("/vmtest")
 	public String vmtest() {
 		
