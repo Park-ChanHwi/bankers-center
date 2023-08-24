@@ -22,30 +22,34 @@ public class MainController {
 	@Autowired
 	private final VMRepository vmRepository = null;
 
-	@PostMapping("/vmlist")
-	public String vmlist(@RequestParam("loginID") String loginID, @RequestParam("loginPW") String loginPW) {
-
-		String result = "false";
-
-		CustEmp custEmp = null;
+	@PostMapping("/custemp")
+	public String custEmp(@RequestParam("custEmpNumber") int custEmpNumber) {
 		try {
-			custEmp = custEmpRepository.findById(loginID).get();
+			return custEmpRepository.findbyCustEmpNumber(custEmpNumber).toString();
+		} catch (Exception e) {
+			return "false";
+		}
+	}
+	
+	@PostMapping("/vmlist")
+	public String vmList(
+			@RequestParam("loginID") String loginID, 
+			@RequestParam("loginPW") String loginPW) {
+		String result = "false";
+		CustEmp player = null;
+		try {
+			player = custEmpRepository.findById(loginID).get();
 		} catch (Exception e) {
 			return result;
 		}
-
-		if (custEmp != null) {
-
-			if (loginPW.equals(custEmp.getCust_pw())) {
-				
+		if (player != null) {
+			if (loginPW.equals(player.getCust_pw())) {
 				List<VM> vmlist = vmRepository.findAll();
 				result = "";
-				
 				for(VM vm : vmlist) {
 					result += vm.toString() + ",";
 				}
 			}
-
 			return result.substring(0, result.length());
 		} else {
 			return result;
@@ -53,23 +57,20 @@ public class MainController {
 	}
 
 	@PostMapping("/login")
-	public String login(@RequestParam("loginID") String loginID, @RequestParam("loginPW") String loginPW) {
-
+	public String login(
+			@RequestParam("loginID") String loginID, 
+			@RequestParam("loginPW") String loginPW) {
 		String result = "false";
-
-		CustEmp custEmp = null;
+		CustEmp player = null;
 		try {
-			custEmp = custEmpRepository.findById(loginID).get();
+			player = custEmpRepository.findById(loginID).get();
 		} catch (Exception e) {
 			return result;
 		}
-
-		if (custEmp != null) {
-
-			if (loginPW.equals(custEmp.getCust_pw())) {
+		if (player != null) {
+			if (loginPW.equals(player.getCust_pw())) {
 				result = "true";
 			}
-
 			return result;
 		} else {
 			return result;

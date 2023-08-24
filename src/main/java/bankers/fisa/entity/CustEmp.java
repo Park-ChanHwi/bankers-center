@@ -24,6 +24,9 @@ public class CustEmp {
 	private String cust_pw;
 	private String cust_pos;
 	
-	
-
+	@Override
+	public String toString() {
+		return cust_emp_number + "_" + cust_number + "_"
+				+ cust_email + "_" + cust_id + "_" + cust_pw + "_" + cust_pos;
+	}
 }
