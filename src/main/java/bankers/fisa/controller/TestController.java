@@ -21,8 +21,6 @@ public class TestController {
 	@Autowired
 	private final CustRepository custRepository = null;
 	@Autowired
-	private final CustEmpRepository custEmpRepository = null;
-	@Autowired
 	private final CreditAlarmRepository creditAlarmRepository = null;
 	@Autowired
 	private final VMAlarmRepository vmAlarmRepository = null;
