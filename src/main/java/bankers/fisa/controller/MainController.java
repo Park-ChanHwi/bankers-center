@@ -32,19 +32,13 @@ public class MainController {
 	}
 	
 	@PostMapping("/vmlist")
-	public String vmlist(
-			@RequestParam("loginID") String id, 
-			@RequestParam("loginPW") String pw) {
-		if(login(id, pw)) {
-			List<VM> vmlist = vmRepository.findAllLatestVM();
-			String result = new String();
-			for(VM vm : vmlist) {
-				result += vm.toString() + ",";
-			}
-			return result;
-		}else {
-			return "false";
+	public String vmlist(@RequestParam("id") String id) {
+		List<VM> vmlist = vmRepository.findAllLatestVM();
+		String result = new String();
+		for(VM vm : vmlist) {
+			result += vm.toString() + ",";
 		}
+		return result;
 	}
 
 	@PostMapping("/login")
