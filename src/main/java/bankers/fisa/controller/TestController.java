@@ -7,7 +7,9 @@ import bankers.fisa.entity.ckey.VMckey;
 import bankers.fisa.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -28,13 +30,12 @@ public class TestController {
 	private final VMRepository vmRepository = null;
 	
 	
-	@GetMapping("/bankersemp")
-	public String getBankersEmp() {
-		
-		BankersEmp bankersEmp = bankersEmpRepository.findById((long) 1).get();
-		System.out.println(bankersEmp.toString());
-		return bankersEmp.toString();
-	}
+	/*
+	 * @GetMapping("/bankersemp") public String getBankersEmp() {
+	 * 
+	 * BankersEmp bankersEmp = bankersEmpRepository.findById("1").get();
+	 * System.out.println(bankersEmp.toString()); return bankersEmp.toString(); }
+	 */
 	
 	@GetMapping("/emprevenue")
 	public String getEmpRevenue() {
@@ -86,5 +87,29 @@ public class TestController {
 		
 		VM vm = vmRepository.findById(vmkey).get();
 		return vm.toString();
+	}
+	
+	@PostMapping("/login")
+	public String loginPage(
+			@RequestParam("loginID") String id, 
+			@RequestParam("loginPW") String pw) {
+		if(login(id, pw)) {
+			return "true";
+		}else {
+	
+			return "false";
+		}
+	}
+	
+	private boolean login(String id, String pw) {
+		try {
+			String player = bankersEmpRepository.findbyBankersBempId(id).getBemp_pw();
+			if (pw.equals(player)) {
+				return true;
+			}
+			return false;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 }
