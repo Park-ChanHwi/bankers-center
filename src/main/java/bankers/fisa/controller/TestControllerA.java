@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/center")
-public class TestController {
+@RequestMapping("/testa")
+public class TestControllerA {
 
 	@Autowired
 	private final BankersEmpRepository bankersEmpRepository = null;

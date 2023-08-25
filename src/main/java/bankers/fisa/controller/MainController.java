@@ -30,10 +30,7 @@ public class MainController {
 	public String getvm(
 			@RequestParam("id") String id,
 			@RequestParam("vmnumber") String vmnumber) {
-		String result = new String();
-		System.out.println(vmRepository.findLatestVM(vmnumber).toString());
-		
-		return result;
+		return vmRepository.findLatestVM(vmnumber).toString();
 	}
 	
 	@PostMapping("/vmcreate")
