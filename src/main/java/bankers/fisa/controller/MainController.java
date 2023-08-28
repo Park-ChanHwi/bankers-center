@@ -18,7 +18,7 @@ import bankers.fisa.repository.CustEmpRepository;
 import bankers.fisa.repository.VMRepository;
 
 @RestController
-@RequestMapping("/controller")
+@RequestMapping("/center")
 public class MainController {
 
 	@Autowired
