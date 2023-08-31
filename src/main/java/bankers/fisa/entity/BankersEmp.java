@@ -23,4 +23,9 @@ public class BankersEmp {
 	private String bemp_id;
 	private String bemp_pw;
 	private String bemp_pos;
+//	@Override
+//	public String toString() {
+//		return bemp_number + "_" + bemp_phone_number + "_" + bemp_name + "_" + bemp_id + "_" + bemp_pw + "_" + bemp_pos;
+//	}
+	
 }

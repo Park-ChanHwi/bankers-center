@@ -11,3 +11,9 @@ public interface BankersEmpRepository extends JpaRepository<BankersEmp, Long> {
 	@Query(value = "SELECT * FROM bankers_emp WHERE bemp_id=?", nativeQuery = true)
 	BankersEmp findbyBankersBempId(String bemp_id);
 }
+
+
+
+
+
+

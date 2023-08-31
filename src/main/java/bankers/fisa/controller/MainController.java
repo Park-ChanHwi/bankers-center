@@ -2,6 +2,7 @@ package bankers.fisa.controller;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -11,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import bankers.fisa.entity.BankersEmp;
 import bankers.fisa.entity.CustEmp;
 import bankers.fisa.entity.VM;
 import bankers.fisa.entity.ckey.VMckey;
+import bankers.fisa.repository.BankersEmpRepository;
 import bankers.fisa.repository.CustEmpRepository;
 import bankers.fisa.repository.VMRepository;
 
@@ -23,6 +26,10 @@ public class MainController {
 
 	@Autowired
 	private final CustEmpRepository custEmpRepository = null;
+	
+	@Autowired
+	private final BankersEmpRepository bankersEmpRepository = null;
+	
 	@Autowired
 	private final VMRepository vmRepository = null;
 	
@@ -57,13 +64,51 @@ public class MainController {
 	}
 	
 	@PostMapping("/custemp")
-	public String custEmp(@RequestParam("custEmpNumber") int custEmpNumber) {
-		try {
-			return custEmpRepository.findbyCustEmpNumber(custEmpNumber).toString();
-		} catch (Exception e) {
-			return "false";
-		}
+	public CustEmp custEmp(@RequestParam("custEmpNumber") int custEmpNumber) {
+		System.out.println("------- " + custEmpNumber);
+		
+		return custEmpRepository.findbyCustEmpNumber(custEmpNumber);
 	}
+	
+	
+//    @PostMapping("/bankersemp")
+//    public String bankersEmp() {
+//        System.out.println("-------센터 접속속  ");
+//        List<BankersEmp> bankersEmpList = bankersEmpRepository.findAll();
+//        StringBuilder result = new StringBuilder();
+//        for (BankersEmp emp : bankersEmpList) {
+//            result.append(emp.toString()).append(",");
+//        }
+//        return result.toString();
+//    }
+
+	
+	/*
+	 * @PostMapping("/bankersemp") public List<BankersEmp> bankersEmp() {
+	 * System.out.println("-------센터 접속속  " );
+	 * 
+	 * System.out.println(bankersEmpRepository.findAll()); try { return
+	 * bankersEmpRepository.findAll(); } catch (Exception e) { return null; } }
+	 */
+    
+	@PostMapping("/bankersemp")
+	public String bankersEmp() {
+	    System.out.println("-------센터 접속");
+
+	    String result = new String();
+	    
+	    for (BankersEmp bankersEmp : bankersEmpRepository.findAll()) {
+	    	result += bankersEmp.getBemp_number() + "_";
+	        result += bankersEmp.getBemp_phone_number() + "_";
+	        result += bankersEmp.getBemp_name() + "_";
+	        result += bankersEmp.getBemp_id() + "_";
+	        result += bankersEmp.getBemp_pw() + "_";
+	        result += bankersEmp.getBemp_pos() + "/";
+	    }
+
+	    return result;
+	}
+	
 	
 	@PostMapping("/vmlist")
 	public String vmlist(@RequestParam("id") String id) {

@@ -1,0 +1,31 @@
+server:
+  port: 7070
+spring:
+  datasource:
+    password: VMware1!
+    url: jdbc:mysql://192.168.0.84:3306/bankersDB?useSSL=false&characterEncoding=UTF-8&&allowPublicKeyRetrieval=true
+    username: bankers
+  jpa:
+    database: mysql
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+  mvc:
+    view:
+      prefix: /WEB-INF/
+      suffix: .jsp    
+    
+  mail:
+    host: smtp.gmail.com
+    password: jnprdhcprhkwgfar
+    port: 587
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+    username: haedam1112@gmail.com
