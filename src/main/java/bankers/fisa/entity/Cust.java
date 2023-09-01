@@ -31,5 +31,14 @@ public class Cust {
 	private int cust_credit;
 	private int cust_total_credit;
 	
-	private Date submit_date;
+	private String submit_date;
+
+	@Override
+	public String toString() {
+		return cust_number + "_" + cust_name + "_"
+				+ cust_display_name + "_" + cust_address + "_" + cust_email
+				+ "_" + cust_ceo_phone_number + "_" + cust_phone_number
+				+ "_" + cust_max_credit + "_" + cust_credit + "_"
+				+ cust_total_credit + "_" + submit_date;
+	}
 }

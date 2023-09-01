@@ -19,5 +19,8 @@ public class VMckey implements Serializable{
 	public String toString() {
 		return vm_number + "_" + vm_create_date;
 	}
-	
+	public VMckey(VMckey vmckey) {
+		vm_number = vmckey.getVm_number();
+		vm_create_date = vmckey.getVm_create_date();
+	}
 }

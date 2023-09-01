@@ -25,4 +25,9 @@ public class VMAlarm {
     private int ram2;
     private int storage1;
     private int storage2;
+    
+	@Override
+	public String toString() {
+		return alarm_number + "_" + vm_number + "_" + cpu1 + "_" + cpu2 + "_" + ram1 + "_" + ram2 + "_" + storage1 + "_" + storage2;
+	}
 }
