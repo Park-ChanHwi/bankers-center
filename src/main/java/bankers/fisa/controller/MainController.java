@@ -277,6 +277,24 @@ public class MainController {
 			return "false";
 		}
 	}
+
+	@PostMapping("/bankersemp")
+	public String bankersEmp() {
+	    System.out.println("-------센터 접속");
+
+	    String result = new String();
+	    
+	    for (BankersEmp bankersEmp : bankersEmpRepository.findAll()) {
+	    	result += bankersEmp.getBemp_number() + "_";
+	    	result += bankersEmp.getBemp_name() + "_";
+	        result += bankersEmp.getBemp_phone_number() + "_";
+	        result += bankersEmp.getBemp_id() + "_";
+	        result += bankersEmp.getBemp_pw() + "_";
+	        result += bankersEmp.getBemp_pos() + "/";
+	    }
+
+	    return result;
+	}
 	
 	@PostMapping("/vmlist")
 	public String vmlist(@RequestParam("id") String id) {
