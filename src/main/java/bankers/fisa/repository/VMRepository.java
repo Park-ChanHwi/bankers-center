@@ -21,4 +21,7 @@ public interface VMRepository extends JpaRepository<VM, VMckey>{
 	
 	@Query(value = "SELECT MAX(vm_number) FROM vm", nativeQuery = true)
 	int getMAXNumber();
+	
+	@Query(value = "SELECT MAX(vm_number) FROM vm WHERE vm_number = ?", nativeQuery = true)
+	int getMAXNumber(String vm_number);
 }
