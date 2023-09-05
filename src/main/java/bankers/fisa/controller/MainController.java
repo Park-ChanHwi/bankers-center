@@ -211,6 +211,16 @@ public class MainController {
 		vmRepository.save(vm);
 	}
 	
+	@PostMapping("/getlog")
+	public String getlog(@RequestParam("vmnumber") String vmnumber) {
+		String result = new String();
+		for(VM vm : vmRepository.getLog(vmnumber)) {
+			result += vm.toString() + ",";
+		};
+		return result.substring(0, result.length() - 1);
+	}
+	
+	
 	@PostMapping("/getvmalarm")
 	public String getvmalarm(@RequestParam("vmnumber") String vmnumber) {
 		return vmAlarmRepository.findVMNumber(vmnumber).toString();
@@ -296,16 +306,21 @@ public class MainController {
 		if(catalType.equals("C") || catalType.equals("D") || catalType.equals("E")) {
 			return "false";
 		}
-		
 		try {
 			int custEmpNumber = custEmpRepository.findById(creater).get().getCust_emp_number();
 			
 			DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
 			String date = dateFormat.format(new Date());
 
-			
-			int vmAlarmMaxNumber = vmAlarmRepository.getMAXNumber() + 1;
+			int vmAlarmMaxNumber = 0;
+			try {
+				vmAlarmMaxNumber = vmAlarmRepository.getMAXNumber() + 1;
+			} catch (Exception e) {
+				vmAlarmMaxNumber = 1;
+			}
+					
 			int tempnumber = (int)(Math.random()*1000) + 90000;
+			
 			VMckey vmckey = new VMckey(tempnumber, date);
 			VM newVM = new VM(vmckey, vmname, catalType, "preparing", "OFF", custEmpNumber);
 			
@@ -545,26 +560,22 @@ public class MainController {
 		}
 		
 	    public void run() {
-			
 	    	URI uri = UriComponentsBuilder.fromUriString("http://localhost:8867")
 					.path("/createVM")
 					.encode()
 					.build()
 					.toUri();
-
 			MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
 			parameters.add("vmname", vm.getVm_name()+":"+((int)(Math.random()*1000)));
 			parameters.add("catalType", vm.getVm_catal_type());
 			
+			
 			RestTemplate restTemplate = new RestTemplate();
 			ResponseEntity<String> responseEntity = restTemplate.postForEntity(uri, parameters, String.class);
-			
 			String responseNumber = responseEntity.getBody().toString().split("-")[1];
 			int vmnumber = Integer.parseInt(responseNumber.substring(0, responseNumber.length()-1));
-			
 			vmRepository.deleteById(vm.getVmckey());
 			vmAlarmRepository.deleteById(Long.valueOf(tempnumber));
-			
 			VMckey vmckey = new VMckey(vmnumber, vm.getVmckey().getVm_create_date());
 			vm = new VM(vmckey, vm.getVm_name(), vm.getVm_catal_type(), "preparing", "OFF", vm.getCust_emp_number());
 			
