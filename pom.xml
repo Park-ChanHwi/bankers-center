@@ -13,7 +13,8 @@
 	<artifactId>bankers-center</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>bankers-center</name>
-	<description>Demo project for Spring Boot</description>
+	<packaging>jar</packaging>
+	<description>bankers-center project</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>

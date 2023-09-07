@@ -32,7 +32,9 @@ import bankers.fisa.repository.VMRepository;
 @RestController
 @RequestMapping("/center")
 public class MainController {
-
+	
+	private static final String vcsmURL = "http://192.168.0.99:8867";
+	
 	@Autowired
 	private final CustEmpRepository custEmpRepository = null;
 	@Autowired
@@ -68,7 +70,7 @@ public class MainController {
 			String storagetotal = null;
 			String storagefree = null;
 			
-			URI uri = UriComponentsBuilder.fromUriString("http://localhost:8867")
+			URI uri = UriComponentsBuilder.fromUriString(vcsmURL)
 					.path("/getvmaddress")
 					.encode()
 					.build()
@@ -114,7 +116,7 @@ public class MainController {
 		List<VM> vmlist = vmRepository.findAllLatestVM();
 		String result = new String();
 		
-		URI uri = UriComponentsBuilder.fromUriString("http://localhost:8867")
+		URI uri = UriComponentsBuilder.fromUriString(vcsmURL)
 				.path("/getvmaddress")
 				.encode()
 				.build()
@@ -196,7 +198,7 @@ public class MainController {
 		vm.setVmckey(vmckey);
 		vm.setVm_state("DEL");
 		
-		URI uri = UriComponentsBuilder.fromUriString("http://localhost:8867")
+		URI uri = UriComponentsBuilder.fromUriString(vcsmURL)
 				.path("/vmdelete")
 				.encode()
 				.build()
@@ -266,7 +268,7 @@ public class MainController {
 					vm.setVm_state(state);
 				}
 				
-				URI uri = UriComponentsBuilder.fromUriString("http://localhost:8867")
+				URI uri = UriComponentsBuilder.fromUriString(vcsmURL)
 						.path("/vmpower")
 						.encode()
 						.build()
@@ -337,34 +339,6 @@ public class MainController {
 			
 			vmcreator.start();
 			
-			/*
-			URI uri = UriComponentsBuilder.fromUriString("http://localhost:8867")
-					.path("/createVM")
-					.encode()
-					.build()
-					.toUri();
-
-			MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
-			parameters.add("vmname", vmname+":"+((int)(Math.random()*1000)));
-			parameters.add("catalType", catalType);
-			
-			RestTemplate restTemplate = new RestTemplate();
-			ResponseEntity<String> responseEntity = restTemplate.postForEntity(uri, parameters, String.class);
-			
-			String responseNumber = responseEntity.getBody().toString().split("-")[1];
-			int vmnumber = Integer.parseInt(responseNumber.substring(0, responseNumber.length()-1));
-			
-			vmRepository.deleteById(newVM.getVmckey());
-			vmAlarmRepository.deleteById(Long.valueOf(tempnumber));
-			
-			vmckey = new VMckey(vmnumber, date);
-			newVM = new VM(vmckey, vmname, catalType, "preparing", "OFF", custEmpNumber);
-			
-			vmRepository.save(newVM);
-			vmAlarmRepository.save(new VMAlarm(
-					vmAlarmMaxNumber, vmnumber,
-					50, 90, 50, 90, 50, 90));
-			*/
 			return "true";
 		} catch (Exception e) {
 			return "false";
@@ -402,7 +376,7 @@ public class MainController {
 	public String vmlist(@RequestParam("id") String id) {
 		List<VM> vmlist = vmRepository.findAllLatestVM();
 		String result = new String();
-		URI uri = UriComponentsBuilder.fromUriString("http://localhost:8867")
+		URI uri = UriComponentsBuilder.fromUriString(vcsmURL)
 				.path("/getvmaddress")
 				.encode()
 				.build()
@@ -560,7 +534,7 @@ public class MainController {
 		}
 		
 	    public void run() {
-	    	URI uri = UriComponentsBuilder.fromUriString("http://localhost:8867")
+	    	URI uri = UriComponentsBuilder.fromUriString(vcsmURL)
 					.path("/createVM")
 					.encode()
 					.build()
